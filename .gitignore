@@ -1,0 +1,20 @@
+# PyCharm ignore  files
+.idea/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+dist/
+build/
+.eggs/
+venv/
+env/
+.venv/
+ENV/
