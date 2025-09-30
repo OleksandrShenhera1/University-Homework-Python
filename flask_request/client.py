@@ -15,15 +15,16 @@ def client_request():
         browser = data.get("browser")
         framework = data.get("framework")
         request_time = datetime.now()
-
+        user_message = data.get("user_message")
 
         user_base_url = "http://127.0.0.1:8000/user_base"
         client_response = {
             "user_name" : user_name,
             "user_password" : user_password,
+            "user_message" : user_message,
             "browser" : browser,
             "framework" : framework,
-            "request_time" : request_time.strftime("%d/%m/%y"),
+            "request_time" : request_time.strftime("%d/%m/%y")
         }
 
         server_response = requests.post(user_base_url, json=client_response)
