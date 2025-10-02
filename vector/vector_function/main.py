@@ -41,10 +41,17 @@ def multiply_vector(first_vec, second_vec):
     return new_vector
 
 def divide_vector(first_vec, second_vec, num):
+    error_msg = "Can't divide by zero."
+    if num == 0:
+        return error_msg
     new_vector1 = []
     new_vector2 = []
     n = len(first_vec)
     for i in range(n):
+        if first_vec[i] == 0:
+            return error_msg
+        elif second_vec[i] == 0:
+            return error_msg
         new_vector1.append(first_vec[i] / num)
         new_vector2.append(second_vec[i] / num)
     return new_vector1, new_vector2
@@ -62,7 +69,14 @@ def user_input():
             print("Enter <float, or int> type, try again.")
 
 if __name__ == "__main__":
-    first_vec, second_vec = read_file("vector_nums.txt")
+    try:
+        first_vec, second_vec = read_file("vector_nums.txt")
+    except ValueError as e:
+        print(f"error : {e}")
+        exit(1)
+    except IndexError:
+        print("file must contain two lines.")
+        exit(1)
     #user = user_input()
 
     results = {

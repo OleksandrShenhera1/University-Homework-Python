@@ -2,54 +2,61 @@
 def read_file(file):
     with open(file, "r") as line:
         lines = line.readlines()
-        vec1 = [float(x) for x in lines[0].strip().split()]
-        vec2 = [float(x) for x in lines[1].strip().split()]
+        first_vec = [float(x) for x in lines[0].strip().split()]
+        second_vec = [float(x) for x in lines[1].strip().split()]
 
-    if len(vec1) != len(vec2):
+    if len(first_vec) != len(second_vec):
         raise ValueError("Vectors must be the same length.")
-    return vec1, vec2
+    return first_vec, second_vec
 
 class VectorCalculator:
-    def __init__(self, vec1):
-        self.vec1 = vec1
+    def __init__(self, first_vec):
+        self.first_vec = first_vec
 
-    def add_vector(self, vec2):
+    def add_vector(self, second_vec):
         new_vector = []
-        n = len(self.vec1)
+        n = len(self.first_vec)
         for i in range(n):
-            new_vector.append(self.vec1[i] + vec2[i])
+            new_vector.append(self.first_vec[i] + second_vec[i])
 
         return new_vector
 
-    def subtract_vector(self, vec2):
+    def subtract_vector(self, second_vec):
         new_vector = []
-        n = len(self.vec1)
+        n = len(self.first_vec)
         for i in range(n):
-            new_vector.append(self.vec1[i] - vec2[i])
+            new_vector.append(self.first_vec[i] - second_vec[i])
 
         return new_vector
 
-    def scalar_vector(self, vec2):
+    def scalar_vector(self, second_vec):
         result = 0
-        n = len(self.vec1)
+        n = len(self.first_vec)
         for i in range(n):
-            result += self.vec1[i] * vec2[i]
+            result += self.first_vec[i] * second_vec[i]
         return result
 
-    def multiply_vector(self, vec2):
+    def multiply_vector(self, second_vec):
         new_vector = []
-        n = len(self.vec1)
+        n = len(self.first_vec)
         for i in range(n):
-            new_vector.append(self.vec1[i] * vec2[i])
+            new_vector.append(self.first_vec[i] * second_vec[i])
         return new_vector
 
-    def divide_vector(self, vec2, num):
+    def divide_vector(self, second_vec, num):
+        error_msg = "Can't divide by zero."
+        if num == 0:
+            return error_msg
         new_vector1 = []
         new_vector2 = []
-        n = len(self.vec1)
+        n = len(self.first_vec)
         for i in range(n):
-            new_vector1.append(self.vec1[i] / num)
-            new_vector2.append(vec2[i] / num)
+            if self.first_vec[i] == 0:
+                return error_msg
+            elif second_vec[i] == 0:
+                return error_msg
+            new_vector1.append(self.first_vec[i] / num)
+            new_vector2.append(second_vec[i] / num)
         return new_vector1, new_vector2
 
 
@@ -65,16 +72,23 @@ def user_input():
             print("Enter <float, or int> type, try again.")
 
 if __name__ == "__main__":
-    vec1, vec2 = read_file("vector_nums.txt")
-    user = user_input()
-    my_vector = VectorCalculator(vec1)
+    try:
+        first_vec, second_vec = read_file("vector_nums.txt")
+    except ValueError as e:
+        print(f"error : {e}")
+        exit(1)
+    except IndexError:
+        print("file must contain two lines.")
+        exit(1)
+    #user = user_input()
+    my_vector = VectorCalculator(first_vec)
 
     results = {
-        "added_vector": my_vector.add_vector(vec2),
-        "subtracted_vector": my_vector.subtract_vector(vec2),
-        "scalar_vector": my_vector.scalar_vector(vec2),
-        "multiplied_vector": my_vector.multiply_vector(vec2),
-        "divided_vector": my_vector.divide_vector(vec2, 2)
+        "added_vector": my_vector.add_vector(second_vec),
+        "subtracted_vector": my_vector.subtract_vector(second_vec),
+        "scalar_vector": my_vector.scalar_vector(second_vec),
+        "multiplied_vector": my_vector.multiply_vector(second_vec),
+        "divided_vector": my_vector.divide_vector(second_vec, 3)
     }
 
     with open("vector_output.txt", "w") as w:
