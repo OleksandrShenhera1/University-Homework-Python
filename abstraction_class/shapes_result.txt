@@ -1,3 +1,0 @@
-Shape: circle, color: purple, area: 78.55, perimeter: 31.419999999999998. 
-Shape: square, color: black, area: 25.0, perimeter: 20.0. 
-Shape: rectangle, color: white, area: 25.0, perimeter: 20.0. 

@@ -66,41 +66,44 @@ class Rectangle(Shape):
     def perimeter(self):
         return 2 * (self.first_side + self.second_side)
 
-def check_shape_type(line):
+def check_shape_type(line, n):
     data = [d.strip() for d in line.split(",")]
     available_shapes = {"circle": 3, "square": 3, "rectangle": 4}
     available_colors = ["purple", "black", "white"]
 
     shape_type = data[0].lower()
     if shape_type not in available_shapes:
-        raise ValueError(f"error: unknown shape: {shape_type}.")
+        raise ValueError(f"error: unknown shape in line idx-{n}: {shape_type}.")
 
     expected_len = available_shapes[shape_type]
     if len(data) != expected_len:
-        raise ValueError(f"error: unexpected size: {len(data)}, size of line must be: {expected_len}.")
+        raise ValueError(f"error: unexpected size: {len(data)} arguments, size of line idx-{n} must be: {expected_len} arguments.")
 
     shape_color = data[1]
     if shape_color not in available_colors:
-        raise ValueError(f"error: unexpected color: {shape_color}, available colors: {available_shapes}.")
+        raise ValueError(f"error: unexpected color in line idx-{n}: {shape_color}, available colors: {available_colors}.")
 
     for i, parameter in enumerate(data[2:], start=2):
         try:
-            isinstance(parameter, (int, float))
+            float(parameter)
+            int(parameter)
         except ValueError:
-            raise ValueError(f"error: parameter {i} must be <int or float> type.")
+            raise ValueError(f"error: parameter in line idx-{n}, parameter: {data[i]} must be <int or float> type.")
 
 
 def read_file(file):
     three_lines = []
+    n = 0
     with open(file, "r") as r:
         for n, line in enumerate(r):
             line = line.strip()
             try:
-                check_shape_type(line)
+                check_shape_type(line, n)
                 data = [d.strip() for d in line.split(",")]
                 three_lines.append(data)
+                n += 1
             except ValueError as e:
-                print(f"error: {e}")
+                raise ValueError(f"{e}")
 
     return three_lines
 
@@ -141,7 +144,11 @@ def write_file(file, message):
             a.write(f"Shape: {key}, {value} \n")
 if __name__=="__main__":
 
-    shapes_data = read_file("shapes_data.txt")
+    try:
+        shapes_data = read_file("shapes_data.txt")
+    except ValueError as e:
+        print(f"{e}")
+        exit(1)
     print(shapes_data)
 
     results = call_methods(shapes_data)
