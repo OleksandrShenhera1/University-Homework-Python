@@ -1,13 +1,13 @@
 class ArrayList:
     def __init__(self):
         self.array = []
-        self.curr_size = 0
+        self.curr_size = 1
 
     def update_size(self):
         self.curr_size = int(self.curr_size * 1.5 + 1)
 
     def is_place(self) -> bool:
-        return self.curr_size - len(self.array) > 0
+        return len(self.array) < self.curr_size
 
     def add_data(self, data):
         if not self.is_place():
@@ -19,12 +19,11 @@ class ArrayList:
         if not self.array:
             print("array is empty.")
             return
-        print(self.array)
+        print(f"array: {self.array}")
 
     def array_getter(self):
         if not self.array:
             raise ValueError("array is empty.")
-            return None
         return self.array
 
 class Node:
@@ -50,6 +49,7 @@ class LinkedList:
 
     def show_list(self):
         current_element = self.head
+        print("linked_list: ", end="")
         while current_element:
             print(current_element.data, end=" <-> ")
             current_element = current_element.next
@@ -75,7 +75,7 @@ def read_file(file):
         raise IndexError("error: file is empty.")
 
     data = [d for d in line.split(",")]
-    print(data)
+    print(f"parsed numbers: {data}")
     return data
 
 def distribute_data(data, array, linkedlist):
