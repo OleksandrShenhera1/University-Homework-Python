@@ -1,0 +1,9 @@
+{"faceit-name": "Romkooo", "elo": 1000, "lvl": 4}
+{"faceit-name": "Xroma4", "elo": 500, "lvl": 6}
+{"faceit-name": "Fofan", "elo": 2000, "lvl": 10}
+{"faceit-name": "Neighbor", "elo": 300, "lvl": 1}
+{"faceit-name": "Kardan", "elo": 750, "lvl": 2}
+{"faceit-name": "Ururu", "elo": 1250, "lvl": 6}
+{"faceit-name": "Nien", "elo": 3000, "lvl": 10}
+{"faceit-name": "Monesy", "elo": 3800, "lvl": 10}
+{"faceit-name": "S1mple", "elo": 4000, "lvl": 10}
