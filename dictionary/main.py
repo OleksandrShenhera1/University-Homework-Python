@@ -33,8 +33,6 @@ def print_nick_and_elo(faceit_dict):
         curr_dict.pop("lvl")
     print_dict(faceit_dict)
 
-def sorted_by_elo(faceit_dict):
-
 
 if __name__ == "__main__":
 

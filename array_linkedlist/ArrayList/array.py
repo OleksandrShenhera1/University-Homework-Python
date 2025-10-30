@@ -90,7 +90,7 @@ def write_file(file, data):
 
 if __name__=="__main__":
     try:
-        data = read_file("data.txt")
+        data = read_file("../LinkedList/data.txt")
     except ValueError as e:
         print(f"error: {e}.")
         exit(1)
@@ -114,4 +114,4 @@ if __name__=="__main__":
 
     array_data = my_array.get_array()
 
-    write_file("data_result.txt", array_data)
+    write_file("../data_result.txt", array_data)
